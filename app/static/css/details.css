@@ -1,0 +1,147 @@
+.body {
+    background-color: white;
+}
+.header {
+    display: flex;
+    gap: 15px;
+}
+
+.header img {
+    width: 50%;
+}
+
+.header_description {
+    width: 50%;
+
+}
+
+.header_title {
+    display: flex;
+    font-size: 25px;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Griffy', cursive;
+}
+
+.header p {
+    display: flex;
+    align-items: center;
+    font-family: 'Griffy', cursive;
+
+}
+
+.mouvie_video {
+    width: 100%;
+}
+
+.mouvie_video iframe {
+    width: 1080px;
+    height: 540px;
+    margin: 20px auto;
+}
+
+.recommended-mouvies {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recom-mouvie {
+    box-shadow: 4px 4px 10px 5px rgba(255, 251, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    /* align-items: ; */
+    width: 190px;
+    text-decoration: none;
+    color: wheat;
+}
+
+.recom-mouvie img {
+    width: 190px;
+}
+
+.mouvie-rate {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.mouvie-rate svg {
+    color: yellow;
+}
+
+.mouvie-description {
+    padding: 10px;
+}
+
+.mouvie-description h3 {
+    height: 50px;
+}
+
+.similar_title {
+    font-family: 'Griffy', cursive;
+    color: yellow;
+}
+
+.mouvie-genres-list {
+    color: yellow;
+}
+
+.liked-mouvies {
+    text-align: right;
+}
+
+.liked-mouvies svg {
+    color: #F08080;
+}
+
+.liked-mouvies.i-like-mouvie svg {
+    color: darkred;
+}
+
+.form form {
+    margin: 20px;
+    padding: 10px;
+    text-align: left;
+    background-color: black;
+
+    display: flex;
+    flex-direction: column;
+}
+form button{
+    display: block;
+    background-color: #FFC907;
+    border-radius: 3px;
+    color: white;
+    font-weight: 700;
+
+}
+
+.comment {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 50px;
+    color: black;
+
+}
+.comment-header { 
+    display: flex;
+    height: 100px;
+    
+}
+.comment-header img {
+    border: 2px solid grey;
+    background-color: white;
+    border-radius: 2px;
+    max-height: 150px;
+    /* position: absolute; */
+    transform: translateY(-50px);
+    margin-right: 10px;
+    
+}
+.comment-header div p {
+    color: lightgray;
+}

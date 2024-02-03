@@ -1,0 +1,116 @@
+{% extends './base.html' %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/details.css">
+
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="header">
+
+        <img src='https://image.tmdb.org/t/p/w500{{data.get("backdrop_path")}}'
+            alt>
+        <div class="header_description">
+            <div class="header_title">
+                <h1>{{data.get("title")}}</h1>
+                <p><strong>
+                        {{data.get("vote_average")}}</strong><svg
+                        stroke="#FFC907" fill="#FFC907" stroke-width="0"
+                        viewBox="0 0 1024 1024" height="1.5em" width="1.5em"
+                        xmlns="http://www.w3.org/2000/svg"><path
+                            d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"></path></svg></p>
+            </div>
+            
+            <div {% if liked %}
+            class="liked-mouvies i-like-mouvie"
+            {% else %}
+            class="liked-mouvies"
+            {% endif %} >
+                <svg data-filmid="{{data.get('id')}}" stroke="currentColor"
+                    fill="currentColor" stroke-width="0"
+                    version="1" viewBox="0 0 48 48"
+                    enable-background="new 0 0 48 48" height="40px" width="40px"
+                    xmlns="http://www.w3.org/2000/svg"><path fill="currentColor"
+                        d="M34,9c-4.2,0-7.9,2.1-10,5.4C21.9,11.1,18.2,9,14,9C7.4,9,2,14.4,2,21c0,11.9,22,24,22,24s22-12,22-24 C46,14.4,40.6,9,34,9z"></path></svg>
+            </div>
+
+            <p class="header_date">
+                {{data.get("release_date")}}
+            </p>
+            <p class="mouvie-genre"><strong>Genre:</strong></p>
+            <ul class="mouvie-genres-list">
+
+                {% for genre in data.get("genres") %}
+                <li>{{genre.get("name")}}</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+    <div class="mouvie_description">
+        <p>{{data.get("overview")}}</p>
+    </div>
+    <div class="mouvie_video">
+        <iframe src="https://www.youtube.com/embed/{{video.get('key')}}"
+            allowfullscreen frameborder="0"></iframe>
+    </div>
+    <div class="similar_title">
+        <h1>Similar Films: </h1>
+    </div>
+    <div class="recommended-mouvies">
+        {% for mouvie in similar_videos %}
+        <a href="{{ url_for('main.mouvis_details',id = mouvie.get('id') ) }}"
+            class="recom-mouvie">
+            <img
+                src='https://image.tmdb.org/t/p/w500{{mouvie.get("poster_path")}}'
+                alt="image not found">
+            <div class="mouvie-description">
+                <h3>{{mouvie.get("title")}}</h3>
+                <p>{{mouvie.get("release_date")}}</p>
+                <div class="mouvie-rate">
+                    <svg stroke="currentColor"
+                        fill="currentColor" stroke-width="0"
+                        viewBox="0 0 576 512" height="1em"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"><path
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+                    <p>{{mouvie.get("vote_average")}}</p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="form" id="mouvie_comments">
+
+        <h1>Comments: </h1>
+
+        <form method="post" action="{{ url_for('main.mouvis_details', id = data.get('id')) }}#mouvie_comments">
+            {{ form.csrf_token }}
+            {{ form.message(cols = 100, rows = 5, placeholder = "Comments") }}
+
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <h1>Others Comments: </h1>
+    <div>
+        {% for item in comments %}
+        <div class="comment">
+            <div class="comment-header">
+                <img src="/static/media/{{current_user.avatar}}" alt="">
+                <div>
+                    <h1>{{item.user.firstname}}</h1>
+                    <p>{{item.date.strftime('%d/%m/%Y')}}</p>
+                </div>
+            </div>
+            <p class="comment-content">
+                {{item.message}}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<script src="/static/js/jqueary.js"></script>
+<script src="/static/js/likemouvie.js"></script>
+
+{% endblock %}

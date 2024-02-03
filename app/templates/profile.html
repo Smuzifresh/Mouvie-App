@@ -1,0 +1,61 @@
+{% extends './base.html' %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/profile.css">
+
+{% endblock %}
+{% block content %}
+<div class="profile_body">
+  <div id="gradient"></div>
+  <div id="card">
+    <div class="card-avatar">
+      <img src="/static/media/{{current_user.avatar}}" />
+      <form id="ponchik" method="POST" enctype="multipart/form-data">
+        {{ upd.csrf_token }}
+        {{ upd.photo (id="input") }}
+      </form>
+    </div>
+    <h2>{{current_user.firstname}}</h2>
+    <h2>{{current_user.lastname}}</h2>
+    <p>I like watcing films</p>
+    <span class="left bottom">email: {{current_user.email}}</span>
+  </div>
+</div>
+<div class="container" style="margin-top: 50px;">
+  <h1>Liked Mouvies:</h1>
+  <div class="recommended-mouvies">
+    {% for mouvie in l_f %}
+    <a href="{{ url_for('mouvis_details',id = mouvie.film_id ) }}"
+      class="recom-mouvie">
+      <img
+        src='https://image.tmdb.org/t/p/w500{{mouvie.poster_path}}'
+        alt="image not found">
+      <div class="mouvie-description">
+        <h3>{{mouvie.title}}</h3>
+        <p>{{mouvie.release_date}}</p>
+
+        <div class="mouvie-rate">
+          <svg stroke="currentColor"
+            fill="currentColor" stroke-width="0"
+            viewBox="0 0 576 512" height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"><path
+              d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+          <p>{{mouvie.vote_average}}</p>
+
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+  const fileInput = document.getElementById('input');
+  const form = document.getElementById("ponchik")
+  fileInput.onchange = () => {
+    form.submit();
+  }
+});
+</script>
+{% endblock %}

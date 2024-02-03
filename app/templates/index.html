@@ -1,0 +1,147 @@
+{% extends './base.html' %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/style.css">
+<link rel="stylesheet" href="/static/css/slider.css">
+<style>
+    .mouvie {
+        background: center no-repeat url('https://image.tmdb.org/t/p/original{{upcoming_mouvies[0].get("backdrop_path")}}');
+        background-size: cover;
+
+    }
+    {% for i in range(20) %}
+        .slider__slide:nth-child({{i + 1}}) .slider__back, .slider__slide:nth-child({{i + 1}}) .slider__inner {
+    background-image: url('https://image.tmdb.org/t/p/original{{upcoming_mouvies[i].get("backdrop_path")}}');
+  }
+  {% endfor %}
+
+</style>
+
+{% endblock %}
+{% block content %}
+
+<!-- <div class="mouvie">
+    <div class="picture">
+        <div class="mouvie-info">
+            <h1>{{upcoming_mouvies[0].get("original_title")}}</h1>
+            <p class="mouvie-desk">{{upcoming_mouvies[0].get("overview")}}</p>
+            <p class="mouvie-genre"><strong>Genre:</strong><br>{{upcoming_mouvies[0].get("genre_ids")}}</p>
+            <a href="/" class="mouvie-btn">Watch</a>
+        </div>
+    </div>
+</div> -->
+<div class="slider">
+
+    {% for i in range(20) %}
+        
+    
+    <div class="slider__slide slider__slide--active" data-slide="{{i + 1}}">
+      <div class="slider__wrap">
+        <div class="slider__back"></div>
+      </div>
+      <div class="slider__inner">
+        <div class="slider__content">
+          <!-- <h1>{{upcoming_mouvies[i].get("title")}}</h1> -->
+          <div class="mouvie-info">
+            <h1>{{upcoming_mouvies[i].get("original_title")}}</h1>
+            <p class="mouvie-desk">{{upcoming_mouvies[i].get("overview")}}</p>
+            
+            <p><strong>Date of release: </strong>{{upcoming_mouvies[i].get("release_date")}}</p>
+            <a href="{{ url_for('main.mouvis_details',id = upcoming_mouvies[i].get('id') ) }}" class="mouvie-btn">Watch</a>
+        </div>
+          <a class="go-to-next">next</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="slider__indicators"></div>
+  </div><a class="sig" href="http://nathan.tokyo" target="_blank">NATHAN.TOKYO</a>
+
+</div>
+<div class="container">
+
+
+<div class="recommended">
+    <div class="recommended-tittle">
+        <h2>Recomended for you</h2>
+        <a href="{{ url_for('main.pop_mouvies' ) }}">Show</a>
+    </div>
+    <div class="recommended-mouvies">
+        {% for mouvie in mouvies %}
+        <a href="{{ url_for('main.mouvis_details',id = mouvie.get('id') ) }}"  class="recom-mouvie">
+            <img
+                src='https://image.tmdb.org/t/p/w500{{mouvie.get("poster_path")}}'
+                alt="image not found">
+            <div class="mouvie-description">
+                <h3>{{mouvie.get("title")}}</h3>
+                <p>{{mouvie.get("release_date")}}</p>
+                <div class="mouvie-rate">
+                    <svg stroke="currentColor"
+                        fill="currentColor" stroke-width="0"
+                        viewBox="0 0 576 512" height="1em"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"><path
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+                    <p>{{mouvie.get("vote_average")}}</p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="recommended">
+    <div class="recommended-tittle">
+        <h2>Top Rated</h2>
+        <a href="{{ url_for('main.top_rated_page' ) }}">Show</a>
+    </div>
+    <div class="recommended-mouvies">
+        {% for mouvie in apmouvies %}
+        <a href="{{ url_for('main.mouvis_details',id = mouvie.get('id') ) }}"  class="recom-mouvie">
+            <img
+                src='https://image.tmdb.org/t/p/w500{{mouvie.get("poster_path")}}'
+                alt="image not found">
+            <div class="mouvie-description">
+                <h3>{{mouvie.get("title")}}</h3>
+                <p>{{mouvie.get("release_date")}}</p>
+                <div class="mouvie-rate">
+                    <svg stroke="currentColor"
+                        fill="currentColor" stroke-width="0"
+                        viewBox="0 0 576 512" height="1em"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"><path
+                            d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+                    <p>{{mouvie.get("vote_average")}}</p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+    for (var i=1; i <= $('.slider__slide').length; i++){
+      $('.slider__indicators').append('<div class="slider__indicator" data-slide="'+i+'"></div>')
+    }
+    setTimeout(function(){
+      $('.slider__wrap').addClass('slider__wrap--hacked');
+    }, 1000);
+  })
+  
+  function goToSlide(number){
+    $('.slider__slide').removeClass('slider__slide--active');
+    $('.slider__slide[data-slide='+number+']').addClass('slider__slide--active');
+  }
+  
+  $('.slider__next, .go-to-next').on('click', function(){
+    var currentSlide = Number($('.slider__slide--active').data('slide'));
+    var totalSlides = $('.slider__slide').length;
+    currentSlide++
+    if (currentSlide > totalSlides){
+      currentSlide = 1;
+    }
+    goToSlide(currentSlide);
+  })
+  </script>
+{% endblock %}

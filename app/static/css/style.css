@@ -1,0 +1,93 @@
+
+.mouvie{
+    width: 100%;
+    height: 400px;
+    
+    background-size: cover;
+}
+.picture {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right,#000,#00000076, #c4c4c41d);
+    display: flex;
+    align-items: center;
+}
+.picture h1 {
+    color: #FFC907;
+    font-family: 'Griffy', cursive;
+}
+.mouvie-info {
+    width: 45%;
+}
+.mouvie-genre strong {
+    text-transform: uppercase;
+    color: darkred;
+}
+.mouvie-btn {
+    display: block;
+    color: white;
+    text-decoration: none;
+    background: #6650A5;
+    width: 120px;
+    height: 30px;
+    border-radius: 20px;
+    padding: 5px;
+    text-align: center;
+    font-size: 25px;
+    line-height: 25px;
+}
+.recommended {
+    margin-top: 50px;
+}
+.recommended-tittle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+.recommended-tittle h2 {
+    font-family: 'Griffy', cursive;
+}
+.recommended-tittle a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    background: #441dae;
+    width: 80px;
+    height: 30px;
+    border-radius: 20px;
+    padding: 5px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 30px;
+}
+.recommended-mouvies {
+    display: flex;
+    justify-content: space-between;
+}
+.recom-mouvie {
+    box-shadow: 4px 4px 10px 5px rgba(255, 251, 0, 0.25);
+    display: flex;
+    flex-direction: column ;
+    /* align-items: ; */
+    width: 220px;
+    text-decoration: none;
+    color: white;
+}
+.recom-mouvie img {
+    width: 220px;
+}
+.mouvie-rate {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.mouvie-rate svg {
+    color: yellow;
+}
+.mouvie-description {
+    padding: 10px;
+}
+.mouvie-description h3 {
+    height: 50px ;
+}
