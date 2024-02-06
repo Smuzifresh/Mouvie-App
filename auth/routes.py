@@ -5,9 +5,9 @@ from flask_login import login_user, login_required, logout_user
 @authblp.route("/profile/sign-up", methods=["GET", "POST"])
 def sign_up():
     from flask import current_app
-    from database import db
+    from app.extensions import db
     from .form import Sign_up_form
-    from database import User
+    from data.user import User
     from werkzeug.utils import secure_filename
     import os
     
@@ -38,7 +38,7 @@ def sign_up():
 @authblp.route("/profile/log-in", methods=["GET", "POST"])
 def log_in():
     from .form import Log_in_form
-    from database import User
+    from data.user import User
 
     form = Log_in_form()
     
