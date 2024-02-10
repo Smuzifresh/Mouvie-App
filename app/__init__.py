@@ -16,6 +16,10 @@ def create_server():
     app.register_blueprint(mainblp)
 
     with app.app_context():
+        db.drop_all()
+        print("database created")
         db.create_all()
+
+    # db.User.metadata.reflect()j
 
     return app

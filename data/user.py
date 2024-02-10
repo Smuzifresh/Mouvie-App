@@ -4,6 +4,7 @@ from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 class User( UserMixin,db.Model):
+    __tablename__ = "user"
     from .liked_films import Liked_Films
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     firstname: Mapped[str] = mapped_column(String, unique=False, nullable=False)
