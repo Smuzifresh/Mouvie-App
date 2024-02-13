@@ -61,3 +61,4 @@ def log_in():
 def log_out():
     logout_user()
     return redirect("/")
+    

@@ -20,6 +20,6 @@ def create_server():
         print("database created")
         db.create_all()
 
-    # db.User.metadata.reflect()j
+    # db.User.metadata.reflect()
 
     return app
